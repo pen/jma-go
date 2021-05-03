@@ -1,5 +1,11 @@
 # jma-go
 
+## 概要
+
+[気象庁の天気予報ページ](https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=130000)の裏で使われている疑似APIの結果をGoで処理しやすくするためのライブラリです。
+
+## サンプル
+
 ```shell
 go run sample/dump-areas.go
 ```
