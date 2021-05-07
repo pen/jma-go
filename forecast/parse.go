@@ -80,7 +80,7 @@ func Parse(reader io.Reader) ([]*Forecast, error) {
 	return forecasts, nil
 }
 
-//nolint: funlen
+//nolint: funlen,gocognit
 func updateForecast(forecast *Forecast, areaItem *rawAreaItem, index int) {
 	if len(areaItem.WeatherCodes) > index {
 		if forecast.Weather == nil {
@@ -128,7 +128,7 @@ func updateForecast(forecast *Forecast, areaItem *rawAreaItem, index int) {
 		forecast.Temperature.Base = &base
 	}
 
-	if len(areaItem.TempsMin) > index {
+	if len(areaItem.TempsMin) > index && areaItem.TempsMin[index] != "" {
 		if forecast.Temperature == nil {
 			forecast.Temperature = &Temperature{}
 		}
@@ -143,7 +143,7 @@ func updateForecast(forecast *Forecast, areaItem *rawAreaItem, index int) {
 		}
 	}
 
-	if len(areaItem.TempsMax) > index {
+	if len(areaItem.TempsMax) > index && areaItem.TempsMax[index] != "" {
 		if forecast.Temperature == nil {
 			forecast.Temperature = &Temperature{}
 		}
