@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"sort"
 
 	"github.com/pen/jma-go/client"
 	"github.com/pen/jma-go/forecast"
@@ -19,13 +20,23 @@ func main() {
 		os.Exit(1)
 	}
 
+	sort.SliceStable(forecasts, func(i int, j int) bool {
+		if forecasts[i].Area.Code < forecasts[j].Area.Code {
+			return true
+		}
+		if forecasts[i].Area.Code == forecasts[j].Area.Code {
+			return forecasts[i].ComesAt.Before(forecasts[j].ComesAt)
+		}
+		return false
+	})
+
 	for _, forecast := range forecasts {
 		dumpForecast(forecast)
 	}
 }
 
 func dumpForecast(f *forecast.Forecast) {
-	fmt.Printf("-- %s %s %s[%s]\n", f.ReportedAt.Format("2006.0102.1504"), f.ComesAt.Format("0102.1504"), f.Area.Name, f.Area.Code)
+	fmt.Printf("---- %s(%s) %s[%s] ----\n", f.ComesAt.Format("2006/01/02 15:04"), f.ReportedAt.Format("01/02 15:04"), f.Area.Name, f.Area.Code)
 
 	if f.Weather != nil {
 		fmt.Printf("天: %s", f.Weather.Code)
@@ -56,7 +67,7 @@ func dumpForecast(f *forecast.Forecast) {
 	if f.Temperature != nil {
 		sp := ""
 		if f.Temperature.Base != nil {
-			fmt.Printf("温: %d", f.Temperature.Base)
+			fmt.Printf("温: %d", *f.Temperature.Base)
 			sp = " "
 		}
 		if f.Temperature.Min != nil {
@@ -66,4 +77,6 @@ func dumpForecast(f *forecast.Forecast) {
 		}
 		fmt.Println("")
 	}
+
+	fmt.Println("")
 }
