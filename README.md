@@ -6,15 +6,16 @@
 
 ## サンプル
 
+
 ```shell
-go run sample/dump-areas.go
+go run sample/show-tokyo-forecasts/main.go
 ```
 
 ```shell
-go run sample/show-tokyo-forecasts.go
+go run sample/dump-areas/main.go
 ```
 
 ```shell
 curl https://www.jma.go.jp/bosai/common/const/area.json > area.json
-go run sample/from-file.go area.json
+go run sample/dump-areas-from-file/main.go area.json
 ```

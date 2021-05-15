@@ -13,8 +13,7 @@ func main() {
 		fmt.Println(`
 download area.json by:
     curl https://www.jma.go.jp/bosai/common/const/area.json > area.json
-and retry me
-`)
+and retry me`)
 		os.Exit(2)
 	}
 
