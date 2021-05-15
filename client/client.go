@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	BaseURI = "https://www.jma.go.jp/"
+	baseURI = "https://www.jma.go.jp/"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func New() *Client {
 }
 
 func callAPI(ctx context.Context, httpClient *http.Client, path string) (*http.Response, error) {
-	resp, err := ctxhttp.Get(ctx, httpClient, BaseURI+path)
+	resp, err := ctxhttp.Get(ctx, httpClient, baseURI+path)
 	if err != nil {
 		return nil, fmt.Errorf("HTTP Get error: %w", err)
 	}

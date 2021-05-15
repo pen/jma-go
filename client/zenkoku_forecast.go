@@ -9,6 +9,7 @@ import (
 
 func (c *Client) GetZenkokuForecasts(ctx context.Context) ([]*forecast.Forecast, error) {
 	pathCode := "010000"
+
 	resp, err := callAPI(ctx, c.httpClient, fmt.Sprintf("bosai/forecast/data/forecast/%s.json", pathCode))
 	if err != nil {
 		return nil, fmt.Errorf("API failed: pathCode: [%s] error: %w", pathCode, err)
