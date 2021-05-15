@@ -10,7 +10,7 @@ import (
 type rawOfficeForecast struct {
 	OfficeCode string           `json:"officeCode"`
 	Name       string           `json:"name"`
-	Srf        rawRangeForecast `json:"srf"`
+	Srf        rawRangeForecast `json:"srf"` // short range forecast?
 	Week       rawRangeForecast `json:"week"`
 }
 
