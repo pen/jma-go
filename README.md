@@ -12,6 +12,10 @@ go run sample/show-tokyo-forecasts/main.go
 ```
 
 ```shell
+go run sample/show-osaka-overview/main.go
+```
+
+```shell
 go run sample/dump-areas/main.go
 ```
 
