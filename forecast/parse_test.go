@@ -1,6 +1,7 @@
 package forecast_test
 
 import (
+	"encoding/json"
 	"os"
 	"reflect"
 	"sort"
@@ -42,11 +43,12 @@ func TestParse(t *testing.T) {
 	}
 }
 
-func TestParse_File(t *testing.T) {
+func TestParse_File(t *testing.T) { //nolint:funlen
 	t.Parallel()
 
 	name := "130000"
 
+	//nolint:lll
 	testCases := []struct {
 		name  string
 		index int
@@ -78,6 +80,7 @@ func TestParse_File(t *testing.T) {
 
 	gotLen := len(forecasts)
 	wantLen := 71
+
 	if gotLen != wantLen {
 		t.Errorf("Parse(): length: got: %+v, want: %+v", gotLen, wantLen)
 	}
@@ -92,13 +95,22 @@ func TestParse_File(t *testing.T) {
 		return forecasts[i].ComesAt.Before(forecasts[j].ComesAt)
 	})
 
+	forecastStr := func(f *forecast.Forecast) string {
+		b, err := json.Marshal(f)
+		if err != nil {
+			return err.Error()
+		}
+
+		return string(b)
+	}
+
 	for _, tc := range testCases {
 		tc := tc
 
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 
-			got := forecasts[tc.index].String() //nolint:typecheck
+			got := forecastStr(forecasts[tc.index])
 			if got != tc.want {
 				t.Errorf("Parse(): got: %s, want: %s", got, tc.want)
 			}
