@@ -69,12 +69,9 @@ func Parse(reader io.Reader) ([]*Forecast, error) {
 		}
 	}
 
-	forecasts := make([]*Forecast, len(forecastMap))
-	i := 0
-
+	forecasts := make([]*Forecast, 0, len(forecastMap))
 	for _, forecast := range forecastMap {
-		forecasts[i] = forecast
-		i++
+		forecasts = append(forecasts, forecast)
 	}
 
 	return forecasts, nil
