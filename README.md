@@ -8,7 +8,7 @@
 
 
 ```shell
-go run sample/show-tokyo-forecasts/main.go
+go run sample/show-tokyo-forecast/main.go
 ```
 
 ```shell
