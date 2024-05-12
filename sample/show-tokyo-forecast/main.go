@@ -25,9 +25,11 @@ func main() {
 		if forecasts[i].Area.Code < forecasts[j].Area.Code {
 			return true
 		}
+
 		if forecasts[i].Area.Code == forecasts[j].Area.Code {
 			return forecasts[i].ComesAt.Before(forecasts[j].ComesAt)
 		}
+
 		return false
 	})
 

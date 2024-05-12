@@ -80,7 +80,7 @@ func Parse(reader io.Reader) ([]*Forecast, error) {
 	return forecasts, nil
 }
 
-//nolint: funlen,gocognit
+//nolint:funlen
 func updateForecast(forecast *Forecast, areaItem *rawAreaItem, index int) {
 	if len(areaItem.WeatherCodes) > index {
 		if forecast.Weather == nil {
